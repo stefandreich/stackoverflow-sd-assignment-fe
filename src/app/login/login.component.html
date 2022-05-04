@@ -1,0 +1,35 @@
+<h1 class="heading-h1">Welcome to StackOverflow</h1>
+<div class="center">
+  <h5>Enter your username</h5>
+  <span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="username" />
+    <label for="float-input">Username</label>
+  </span>
+
+  <h5>Enter your Password</h5>
+  <p-password
+    [(ngModel)]="password"
+    [feedback]="false"
+    [toggleMask]="true"
+  ></p-password>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Login"
+    class="btn-login"
+    (click)="loginUser()"
+  ></button>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Register"
+    class="p-button-outlined btn-register"
+    (click)="toRegistrationForm()"
+  ></button>
+</div>
+
+

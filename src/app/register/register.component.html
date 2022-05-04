@@ -1,0 +1,39 @@
+<h1 class="heading-h1">Registration Form</h1>
+<div class="center">
+  <h5>Enter your username</h5>
+  <span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="username" />
+    <label for="float-input">Username</label>
+  </span>
+
+  <h5>Enter your email</h5>
+  <span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="email" />
+    <label for="float-input">Email</label>
+  </span>
+
+  <h5>Enter your password Password</h5>
+  <p-password
+    [(ngModel)]="password"
+    [feedback]="false"
+    [toggleMask]="true"
+  ></p-password>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Sign Up"
+    class="btn-signup"
+    (click)="signupUser()"
+  ></button>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Go Back"
+    class="btn-signup"
+    (click)="toLoginComponent()"
+  ></button>
+</div>

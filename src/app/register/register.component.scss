@@ -1,0 +1,32 @@
+.heading-h1 {
+  text-align: center;
+  margin-top: 5%;
+}
+
+.center {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.sizes {
+  .p-inputtext {
+    display: block;
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.p-field * {
+  display: block;
+}
+
+.btn-signup {
+  display: flex;
+  margin-right: 10%;
+  margin-left: 20%;
+  margin-top: 10%;
+}

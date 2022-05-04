@@ -1,0 +1,166 @@
+<p-table
+  [value]="question.answers"
+  styleClass="p-datatable-striped"
+  *ngIf="this.question"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pEditableColumn>
+        <p-cellEditor *ngIf="isSameUser(question.user.userId); else dtqt">
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="question.title"
+              required
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ question.title }}
+          </ng-template>
+        </p-cellEditor>
+        <ng-template #dtqt> {{ question.title }} </ng-template>
+      </th>
+      <th pEditableColumn>
+        <p-cellEditor *ngIf="isSameUser(question.user.userId); else dtq">
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="question.questionText"
+              required
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ question.questionText }}
+          </ng-template>
+        </p-cellEditor>
+        <ng-template #dtq> {{ question.questionText }} </ng-template>
+      </th>
+      <th (click)="voteQuestion(true)">Likes: {{ this.question.posVotes }}</th>
+      <th (click)="voteQuestion(false)">
+        Dislikes: {{ this.question.negVotes }}
+      </th>
+      <th>
+        Tags:
+        <div *ngFor="let tag of this.question.tags">
+          {{ "#" + tag.text }}
+        </div>
+      </th>
+      <th
+        (click)="deleteQuestion(this.question.questionId)"
+        *ngIf="isSameUser(this.question.user.userId)"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          class="p-button-rounded p-button-danger"
+        ></button>
+      </th>
+      <th>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Edit"
+          class="btn-login"
+          (click)="editQuestion()"
+          *ngIf="isSameUser(question.user.userId)"
+        ></button>
+      </th>
+    </tr>
+  </ng-template>
+</p-table>
+
+<hr class="hr-space" />
+
+<p-table
+  [value]="question.answers"
+  styleClass="p-datatable-striped"
+  *ngIf="this.question"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Answer</th>
+      <th>User</th>
+      <th pSortableColumn="posVotes">
+        Likes <p-sortIcon field="posVotes"></p-sortIcon>
+      </th>
+      <th pSortableColumn="negVotes">
+        Dislikes <p-sortIcon field="negVotes"></p-sortIcon>
+      </th>
+      <th>Delete?</th>
+      <th>Edit</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-answer>
+    <tr>
+      <td pEditableColumn>
+        <p-cellEditor *ngIf="isSameUser(answer.user.userId); else dt">
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="answer.answerText"
+              required
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ answer.answerText }}
+          </ng-template>
+        </p-cellEditor>
+        <ng-template #dt> {{ answer.answerText }} </ng-template>
+      </td>
+      <td>{{ answer.user.username }}</td>
+      <td (click)="voteAnswer(true, answer)">{{ answer.posVotes }}</td>
+      <td (click)="voteAnswer(false, answer)">{{ answer.negVotes }}</td>
+      <td *ngIf="isSameUser(answer.user.userId)">
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-times"
+          class="p-button-rounded p-button-danger"
+          (click)="deleteAnswer(answer.answerId)"
+        ></button>
+      </td>
+      <td *ngIf="isSameUser(answer.user.userId)">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Edit"
+          class="btn-login"
+          (click)="editAnswer(answer)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<hr class="hr-space" />
+
+<div class="container">
+  <h5>Add an answer</h5>
+  <span class="p-float-label">
+    <textarea
+      id="float-input"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="newAnswer"
+    ></textarea>
+    <label for="float-input">Answer text</label>
+  </span>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Save"
+    class="btn-login"
+    (click)="saveAnswer()"
+  ></button>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+  <h5>Add title</h5>
+  <span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="title" />
+    <label for="float-input">Question title</label>
+  </span>
+
+  <br />
+
+  <h5>Add text</h5>
+  <span class="p-float-label">
+    <textarea
+      id="float-input"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="questionText"
+    ></textarea>
+    <label for="float-input">Question text</label>
+  </span>
+
+  <!-- <span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="tag" />
+    <label for="float-input">Question tag/s</label>
+  </span> -->
+
+  <br />
+
+  <div class="form-group" style="width: 20rem;">
+    <label>Question tags</label>
+    <tag-input
+      [(ngModel)]="items"
+      (onAdd)="onAdding($event)"
+      (onRemove)="onRemoving($event)"
+      [separatorKeyCodes]="[32]"
+      >
+      <tag-input-dropdown
+        [autocompleteObservable]="requestAutocompleteItems"
+        displayBy="text"
+        identifyBy="text"
+      >
+      </tag-input-dropdown>
+    </tag-input>
+  </div>
+
+  <br />
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Save"
+    class="btn-save"
+    (click)="saveQuestion()"
+  ></button>
+</div>
